@@ -11,7 +11,7 @@ namespace ProjetoAPI.Models
         public string Corpo { get; set; }
         public string ImageUrl { get; set; }
         //public IEnumerable<string> Tags { get; set; }
-        public DateTime DataPergunta { get; set; }
+        public DateTime DataPergunta { get; set; } = new DateTime();
         public bool Status { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }

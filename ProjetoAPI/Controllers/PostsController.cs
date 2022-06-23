@@ -31,7 +31,6 @@ namespace ProjetoAPI.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             try
@@ -48,27 +47,25 @@ namespace ProjetoAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetById(int id)
-        {
-            try
-            {
-                var evento = await _postService.GetPostByIdAsync(id);
-                if (evento == null) return NoContent();
+        //[HttpGet("post/{id}")]
+        //public async Task<IActionResult> GetById(int id)
+        //{
+        //    try
+        //    {
+        //        var evento = await _postService.GetPostByIdAsync(id);
+        //        if (evento == null) return NoContent();
 
-                return Ok(evento);
-            }
-            catch (Exception ex)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
-            }
-        }
+        //        return Ok(evento);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return this.StatusCode(StatusCodes.Status500InternalServerError,
+        //            $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
+        //    }
+        //}
 
-        [HttpGet("{userId}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetByIdUserId(int userId)
+        [HttpGet("post/user/")]
+        public async Task<IActionResult> GetByIdUserId()
         {
             try
             {
@@ -101,23 +98,22 @@ namespace ProjetoAPI.Controllers
         //    }
         //}
 
-        [HttpGet("{titulo}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetByTitulo(string titulo)
-        {
-            try
-            {
-                var evento = await _postService.GetPostByTituloAsync(User.GetUserId(), titulo);
-                if (evento == null) return NoContent();
+        //[HttpGet("{titulo}")]
+        //public async Task<IActionResult> GetByTitulo(string titulo)
+        //{
+        //    try
+        //    {
+        //        var evento = await _postService.GetPostByTituloAsync(User.GetUserId(), titulo);
+        //        if (evento == null) return NoContent();
 
-                return Ok(evento);
-            }
-            catch (Exception ex)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
-            }
-        }
+        //        return Ok(evento);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return this.StatusCode(StatusCodes.Status500InternalServerError,
+        //            $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
+        //    }
+        //}
 
 
 
@@ -147,7 +143,6 @@ namespace ProjetoAPI.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Post(PostDto model)
         {
             try
@@ -164,13 +159,12 @@ namespace ProjetoAPI.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Put(int id, PostDto model)
+        [HttpPut("{postId}")]
+        public async Task<IActionResult> Put(int postId, PostDto model)
         {
             try
             {
-                var evento = await _postService.UpdatePost(User.GetUserId(), id, model);
+                var evento = await _postService.UpdatePost(User.GetUserId(), postId, model);
                 if (evento == null) return NoContent();
 
                 return Ok(evento);
@@ -183,7 +177,6 @@ namespace ProjetoAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [AllowAnonymous]
         public async Task<IActionResult> Delete(int id)
         {
             try

@@ -24,7 +24,7 @@ namespace ProjetoAPI.Controllers
             _accountService = accountService;
         }
 
-        [HttpGet("{postId}")]
+        [HttpGet("post/{postId}")]
         public async Task<IActionResult> GetByPost(int postId)
         {
             try
@@ -41,7 +41,7 @@ namespace ProjetoAPI.Controllers
             }
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("post/user{userId}")]
         public async Task<IActionResult> GetByUser(int userId)
         {
             try

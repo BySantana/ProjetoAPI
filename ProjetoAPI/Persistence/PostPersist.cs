@@ -19,8 +19,8 @@ namespace ProjetoAPI.Persistence
         public async Task<Post[]> GetAllPostAsync()
         {
             IQueryable<Post> query = _context.Posts
-                .Include(p => p.Comentarios);
-                //.Include(p => p.Tags);
+                .Include(p => p.Comentarios)
+                .Include(p => p.User);
 
             return await query.ToArrayAsync();
         }
@@ -28,8 +28,8 @@ namespace ProjetoAPI.Persistence
         public async Task<Post[]> GetAllPostByUserIdAsync(int userId)
         {
             IQueryable<Post> query = _context.Posts
-                .Include(p => p.Comentarios);
-                //.Include(p => p.Tags);
+                .Include(p => p.Comentarios)
+                .Include(p => p.User);
 
             query = query.Where(p => p.UserId == userId);
 
@@ -39,8 +39,8 @@ namespace ProjetoAPI.Persistence
         public async Task<Post> GetPostByIdAsync(int postId)
         {
             IQueryable<Post> query = _context.Posts
-                .Include(p => p.Comentarios);
-                //.Include(p => p.Tags);
+                .Include(p => p.Comentarios)
+                .Include(p => p.User);
 
             query = query.Where(p => p.PostId == postId);
 
