@@ -17,7 +17,10 @@ namespace ProjetoAPI.Persistence
         }
         public async Task<Comentario[]> GetAllComentariosAsync(int postId)
         {
-            IQueryable<Comentario> query = _context.Comentarios;
+            IQueryable<Comentario> query = _context.Comentarios
+                .Include(c => c.Interacoes)
+                .Include(p => p.User)
+                .Include(a => a.Post);
 
             query = query.Where(x => x.PostId == postId);
 
@@ -26,7 +29,10 @@ namespace ProjetoAPI.Persistence
 
         public async Task<Comentario[]> GetComentariosByUserId(int userId)
         {
-            IQueryable<Comentario> query = _context.Comentarios;
+            IQueryable<Comentario> query = _context.Comentarios
+                .Include(c => c.Interacoes)
+                .Include(p => p.User)
+                .Include(a => a.Post);
 
             query = query.Where(x => x.UserId == userId);
 
@@ -35,7 +41,10 @@ namespace ProjetoAPI.Persistence
 
         public async Task<Comentario> GetComentarioByIdAsync(int comentarioId)
         {
-            IQueryable<Comentario> query = _context.Comentarios;
+            IQueryable<Comentario> query = _context.Comentarios
+                .Include(c => c.Interacoes)
+                .Include(p => p.User)
+                .Include(a => a.Post);
 
             query = query.Where(x => x.ComentarioId == comentarioId);
 

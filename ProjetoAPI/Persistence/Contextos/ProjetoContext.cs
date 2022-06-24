@@ -16,6 +16,7 @@ namespace ProjetoAPI.Persistence.Contextos
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
+        public DbSet<Interacao> Interacoes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

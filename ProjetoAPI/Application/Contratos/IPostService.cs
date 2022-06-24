@@ -7,7 +7,7 @@ namespace ProjetoAPI.Application.Contratos
     {
         Task<PostDto> AddPost(int userId, PostDto model);
         Task<PostDto> UpdatePost(int userId, int postId, PostDto model);
-        Task<bool> DeletePost(int postId);
+        Task<bool> DeletePost(int userId, int postId);
 
         Task<PostDto[]> GetAllPostAsync();
         Task<PostDto[]> GetAllPostByUserIdAsync(int userId);

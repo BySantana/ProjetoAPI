@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoAPI.Application.Contratos;
 using ProjetoAPI.Application.Dtos;
-using ProjetoAPI.Controllers.Helpers;
 using ProjetoAPI.Extensions;
 using System;
 using System.Threading.Tasks;
@@ -13,23 +12,23 @@ namespace ProjetoAPI.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class ComentariosController : ControllerBase
+    public class InteracoesController : ControllerBase
     {
-        private readonly IComentarioService _comentarioService;
+        private readonly IInteracaoService _interacaoService;
         private readonly IAccountService _accountService;
 
-        public ComentariosController(IComentarioService comentarioService, IAccountService accountService)
+        public InteracoesController(IInteracaoService interacaoService, IAccountService accountService)
         {
-            _comentarioService = comentarioService;
+            _interacaoService = interacaoService;
             _accountService = accountService;
         }
 
-        [HttpGet("comentarios/{postId}")]
-        public async Task<IActionResult> GetByPost(int postId)
+        [HttpGet("comentario/{comentarioId}")]
+        public async Task<IActionResult> GetByComentario(int comentarioId)
         {
             try
             {
-                var eventos = await _comentarioService.GetAllComentariosAsync(postId);
+                var eventos = await _interacaoService.GetInteracoesByComentarioIdAsync(comentarioId);
                 if (eventos == null) return NoContent();
 
                 return Ok(eventos);
@@ -41,12 +40,12 @@ namespace ProjetoAPI.Controllers
             }
         }
 
-        [HttpGet("comentarios/userId")]
-        public async Task<IActionResult> GetByUser()
+        [HttpGet("{interacaoId}")]
+        public async Task<IActionResult> GetById(int interacaoId)
         {
             try
             {
-                var eventos = await _comentarioService.GetComentariosByUserId(User.GetUserId());
+                var eventos = await _interacaoService.GetInteracaoByIdAsync(interacaoId);
                 if (eventos == null) return NoContent();
 
                 return Ok(eventos);
@@ -59,14 +58,14 @@ namespace ProjetoAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(ComentarioDto model, int postId)
+        public async Task<IActionResult> Post(InteracaoDto model, int comentarioId)
         {
             try
             {
-                var evento = await _comentarioService.AddComentario(User.GetUserId(), postId, model);
-                if (evento == null) return NoContent();
+                var interacao = await _interacaoService.AddInteracao(User.GetUserId(), comentarioId, model);
+                if (interacao == null) return NoContent();
 
-                return Ok(evento);
+                return Ok(interacao);
             }
             catch (Exception ex)
             {
@@ -76,19 +75,19 @@ namespace ProjetoAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, ComentarioDto model)
+        public async Task<IActionResult> Put(int id, InteracaoDto model)
         {
             try
             {
-                var evento = await _comentarioService.UpdateComentario(User.GetUserId(), id, model);
-                if (evento == null) return NoContent();
+                var interacao = await _interacaoService.UpdateInteracao(User.GetUserId(), id, model);
+                if (interacao == null) return NoContent();
 
-                return Ok(evento);
+                return Ok(interacao);
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar atualizar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar atualizar interações. Erro: {ex.Message}");
             }
         }
 
@@ -97,10 +96,10 @@ namespace ProjetoAPI.Controllers
         {
             try
             {
-                var evento = await _comentarioService.GetComentarioById(id);
+                var evento = await _interacaoService.GetInteracaoByIdAsync(id);
                 if (evento == null) return NoContent();
 
-                if (await _comentarioService.DeleteComentario(User.GetUserId(), id))
+                if (await _interacaoService.DeleteInteracao(User.GetUserId(), id))
                 {
                     return Ok(new { message = "Deletado" });
                 }

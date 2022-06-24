@@ -27,6 +27,7 @@ namespace ProjetoAPI.Application
             {
                 var comentario = _mapper.Map<Comentario>(model);
                 comentario.UserId = userId;
+                comentario.PostId = postId;
 
                 _geralPersist.Add(comentario);
 
@@ -51,9 +52,16 @@ namespace ProjetoAPI.Application
                 var comentario = await _comentarioPersist.GetComentarioByIdAsync(comentarioId);
                 if (comentario == null) throw new Exception("Comentario para delete não encontrado.");
 
-                _geralPersist.Delete(comentario);
+                if(comentario.UserId == userId)
+                {
+                    _geralPersist.Delete(comentario);
 
-                return await _geralPersist.SaveChangesAsync();
+                    return await _geralPersist.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("Usuário sem permissão.");
+                }
 
             }
             catch (Exception ex)

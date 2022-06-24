@@ -13,5 +13,7 @@ namespace ProjetoAPI.Models.Identity
         public IEnumerable<UserRole> UserRoles { get; set; }
         public IEnumerable<Post> Posts { get; set; }
         public IEnumerable<Comentario> Comentarios { get; set; }
+        public IEnumerable<Interacao> Interacoes { get; set; }
+
     }
 }

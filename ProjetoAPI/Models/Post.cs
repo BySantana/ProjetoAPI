@@ -10,8 +10,9 @@ namespace ProjetoAPI.Models
         public string Titulo { get; set; }
         public string Corpo { get; set; }
         public string ImageUrl { get; set; }
-        //public IEnumerable<string> Tags { get; set; }
-        public DateTime DataPergunta { get; set; } = new DateTime();
+        public string Tag1 { get; set; }
+        public string Tag2 { get; set; }
+        public string DataPergunta { get; set; }
         public bool Status { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }

@@ -44,15 +44,23 @@ namespace ProjetoAPI.Application
             }
         }
 
-        public async Task<bool> DeletePost(int postId)
+        public async Task<bool> DeletePost(int userId, int postId)
         {
             try
             {
                 var evento = await _postPersist.GetPostByIdAsync(postId);
                 if (evento == null) throw new Exception("Evento para delete não encontrado.");
 
-                _geralPersist.Delete<Post>(evento);
-                return await _geralPersist.SaveChangesAsync();
+                if(evento.UserId == userId)
+                {
+                    _geralPersist.Delete<Post>(evento);
+                    return await _geralPersist.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("Evento para delete não encontrado.");
+                }
+                
             }
             catch (Exception ex)
             {

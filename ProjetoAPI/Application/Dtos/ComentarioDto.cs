@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ProjetoAPI.Application.Dtos
 {
@@ -10,6 +11,7 @@ namespace ProjetoAPI.Application.Dtos
         public DateTime DataComentario { get; set; }
         public int PostId { get; set; }
         public PostDto Post { get; set; }
+        public IEnumerable<InteracaoDto> Interacoes { get; set; }
         public int UserId { get; set; }
         public UserDto User { get; set; }
     }

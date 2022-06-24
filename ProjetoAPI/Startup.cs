@@ -95,11 +95,13 @@ namespace ProjetoAPI
             services.AddScoped<IComentarioService, ComentarioService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IInteracaoService, InteracaoService>();
             services.AddScoped<IUtil, Util>();
 
             services.AddScoped<IGeralPersist, GeralPersist>();
             services.AddScoped<IPostPersist, PostPersist>();
             services.AddScoped<IUserPersist, UserPersist>();
+            services.AddScoped<IInteracaoPersist, InteracaoPersist>();
             services.AddScoped<IComentarioPersist, ComentarioPersist>();
 
             services.AddCors();

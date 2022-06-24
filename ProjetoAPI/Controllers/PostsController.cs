@@ -184,7 +184,7 @@ namespace ProjetoAPI.Controllers
                 var evento = await _postService.GetPostByIdAsync(id);
                 if (evento == null) return NoContent();
 
-                if (await _postService.DeletePost(id))
+                if (await _postService.DeletePost(User.GetUserId(), id))
                 {
                     _util.DeleteImage(evento.ImagemURL, _destino);
                     return Ok(new { message = "Deletado" });
