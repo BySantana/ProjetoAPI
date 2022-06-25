@@ -30,6 +30,8 @@
   <ItemGroup>
     <Folder Include="Helpers\Resources\Images\" />
     <Folder Include="Helpers\Resources\Perfil\" />
+    <Folder Include="Resources\Images\" />
+    <Folder Include="Resources\Perfil\" />
   </ItemGroup>
 
 </Project>
