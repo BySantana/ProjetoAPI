@@ -11,6 +11,7 @@ namespace ProjetoAPI.Application.Helpers
         public ProjetoProfile()
         {
             CreateMap<Post, PostDto>().ReverseMap();
+
             CreateMap<Comentario, ComentarioDto>().ReverseMap();
             CreateMap<Interacao, InteracaoDto>().ReverseMap();
 

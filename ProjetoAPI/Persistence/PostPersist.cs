@@ -39,24 +39,25 @@ namespace ProjetoAPI.Persistence
         public async Task<Post> GetPostByIdAsync(int postId)
         {
             IQueryable<Post> query = _context.Posts
-                .Include(p => p.Comentarios)
-                .Include(p => p.User);
+                .Include(p => p.Comentarios);
+                //.Include(p => p.User);
 
             query = query.Where(p => p.PostId == postId);
 
             return await query.FirstOrDefaultAsync();
         }
 
-        //public async Task<Post[]> GetPostByTagAsync(int userId, string tag)
-        //{
-        //    IQueryable<Post> query = _context.Posts
-        //        .Include(p => p.Comentarios);
-        //        //.Include(p => p.Tags);
+        public async Task<Post[]> getpostbytagasync(int userid, string tag)
+        {
+            IQueryable<Post> query = _context.Posts
+                .Include(g => g.User);
 
-        //    query = query.Where(p => p.Tags.Contains(tag));
 
-        //    return await query.ToArrayAsync();
-        //}
+            query = query.Where(p => p.Tag1.Contains(tag) || p.Tag2.Contains(tag));
+                                
+
+            return await query.ToArrayAsync();
+        }
 
         public async Task<Post[]> GetPostByTituloAsync(string titulo)
         {

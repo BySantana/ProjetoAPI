@@ -31,6 +31,7 @@ namespace ProjetoAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             try
@@ -47,22 +48,22 @@ namespace ProjetoAPI.Controllers
             }
         }
 
-        //[HttpGet("post/{id}")]
-        //public async Task<IActionResult> GetById(int id)
-        //{
-        //    try
-        //    {
-        //        var evento = await _postService.GetPostByIdAsync(id);
-        //        if (evento == null) return NoContent();
+        [HttpGet("post/{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                var evento = await _postService.GetPostByIdAsync(id);
+                if (evento == null) return NoContent();
 
-        //        return Ok(evento);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return this.StatusCode(StatusCodes.Status500InternalServerError,
-        //            $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
-        //    }
-        //}
+                return Ok(evento);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
+            }
+        }
 
         [HttpGet("post/user/")]
         public async Task<IActionResult> GetByIdUserId()
@@ -159,12 +160,12 @@ namespace ProjetoAPI.Controllers
             }
         }
 
-        [HttpPut("{postId}")]
-        public async Task<IActionResult> Put(int postId, PostDto model)
+        [HttpPut("put/{id}")]
+        public async Task<IActionResult> Put(int id, PostDto model)
         {
             try
             {
-                var evento = await _postService.UpdatePost(User.GetUserId(), postId, model);
+                var evento = await _postService.UpdatePost(User.GetUserId(), id, model);
                 if (evento == null) return NoContent();
 
                 return Ok(evento);
@@ -176,7 +177,7 @@ namespace ProjetoAPI.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
