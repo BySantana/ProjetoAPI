@@ -294,6 +294,9 @@ namespace ProjetoAPI.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Like")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("Status")
                         .HasColumnType("INTEGER");
 

@@ -12,7 +12,7 @@ namespace ProjetoAPI.Application.Contratos
         Task<PostDto[]> GetAllPostAsync();
         Task<PostDto[]> GetAllPostByUserIdAsync(int userId);
         Task<PostDto> GetPostByIdAsync(int postId);
-        //Task<PostDto[]> GetPostByTagAsync(int userId, string tag);
+        Task<PostDto[]> GetPostByTagAsync(string tag);
         Task<PostDto[]> GetPostByTituloAsync(int userId, string Titulo);
     }
 }

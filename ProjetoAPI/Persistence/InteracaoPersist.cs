@@ -19,7 +19,8 @@ namespace ProjetoAPI.Persistence
         public async Task<Interacao> GetInteracaoByIdAsync(int interacaoId)
         {
             IQueryable<Interacao> query = _context.Interacoes
-                .Include(p => p.User);
+                .Include(p => p.User)
+                .Include(a => a.Comentario);
 
             query = query.Where(p => p.InteracaoId == interacaoId);
 
@@ -29,7 +30,8 @@ namespace ProjetoAPI.Persistence
         public async Task<Interacao[]> GetInteracoesByComentarioAsync(int comentarioId)
         {
             IQueryable<Interacao> query = _context.Interacoes
-                .Include(p => p.User);
+                .Include(p => p.User)
+                .Include(a => a.Comentario);
 
             query = query.Where(a => a.ComentarioId == comentarioId);
 

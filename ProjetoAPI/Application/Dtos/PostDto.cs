@@ -12,6 +12,7 @@ namespace ProjetoAPI.Application.Dtos
         public string Tag1 { get; set; }
         public string Tag2 { get; set; }
         public string DataPergunta { get; set; }
+        public int Like { get; set; }
         public bool Status { get; set; }
         public int UserId { get; set; }
         public UserDto User { get; set; }

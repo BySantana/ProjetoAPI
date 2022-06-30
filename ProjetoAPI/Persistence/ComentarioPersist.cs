@@ -42,9 +42,9 @@ namespace ProjetoAPI.Persistence
         public async Task<Comentario> GetComentarioByIdAsync(int comentarioId)
         {
             IQueryable<Comentario> query = _context.Comentarios
-                .Include(c => c.Interacoes)
-                .Include(p => p.User)
-                .Include(a => a.Post);
+                .Include(c => c.Interacoes);
+                //.Include(p => p.User)
+                //.Include(a => a.Post);
 
             query = query.Where(x => x.ComentarioId == comentarioId);
 

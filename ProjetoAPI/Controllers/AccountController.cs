@@ -50,6 +50,22 @@ namespace ProjetoAPI.Controllers
                     $"Erro ao tentar recuperar Usuário. Erro: {ex.Message}");
             }
         }
+        [HttpGet("GetAllUsers")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            try
+            {
+                var user = await _accountService.GetUsersAsync();
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar Usuário. Erro: {ex.Message}");
+            }
+        }
+
 
         [HttpPost("Register")]
         [AllowAnonymous]

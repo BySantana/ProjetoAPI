@@ -58,7 +58,7 @@ namespace ProjetoAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("{postId}")]
         public async Task<IActionResult> Post(ComentarioDto model, int postId)
         {
             try

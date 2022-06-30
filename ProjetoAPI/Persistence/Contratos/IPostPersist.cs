@@ -8,7 +8,7 @@ namespace ProjetoAPI.Persistence.Contratos
         Task<Post[]> GetAllPostAsync();
         Task<Post[]> GetAllPostByUserIdAsync(int userId);
         Task<Post> GetPostByIdAsync(int postId);
-        //Task<Post[]> GetPostByTagAsync(int userId, string tag);
+        Task<Post[]> GetPostByTagAsync(string tag);
         Task<Post[]> GetPostByTituloAsync(string Titulo);
     }
 }

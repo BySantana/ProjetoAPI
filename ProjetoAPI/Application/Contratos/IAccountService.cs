@@ -11,5 +11,6 @@ namespace ProjetoAPI.Application.Contratos
         Task<SignInResult> CheckUserPasswordAsync(UserUpdateDto userUpdateDto, string password);
         Task<UserUpdateDto> CreateAccountAsync(UserDto userDto);
         Task<UserUpdateDto> UpdateAccount(UserUpdateDto userUpdateDto);
+        Task<UserUpdateDto[]> GetUsersAsync();
     }
 }

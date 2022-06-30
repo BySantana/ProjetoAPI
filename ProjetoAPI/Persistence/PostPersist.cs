@@ -20,7 +20,8 @@ namespace ProjetoAPI.Persistence
         {
             IQueryable<Post> query = _context.Posts
                 .Include(p => p.Comentarios)
-                .Include(p => p.User);
+                .Include(p => p.User)
+                .OrderByDescending(p => p.PostId);
 
             return await query.ToArrayAsync();
         }
@@ -47,7 +48,7 @@ namespace ProjetoAPI.Persistence
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<Post[]> getpostbytagasync(int userid, string tag)
+        public async Task<Post[]> GetPostByTagAsync(string tag)
         {
             IQueryable<Post> query = _context.Posts
                 .Include(g => g.User);
@@ -58,6 +59,12 @@ namespace ProjetoAPI.Persistence
 
             return await query.ToArrayAsync();
         }
+
+        //public async Task<string[]> getTagsByPosts()
+        //{
+        //    IQueryable<Post> produtosSemRepeticao =
+        //        _context.Posts;
+        //}
 
         public async Task<Post[]> GetPostByTituloAsync(string titulo)
         {

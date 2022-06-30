@@ -79,6 +79,22 @@ namespace ProjetoAPI.Application
             }
         }
 
+        public async Task<UserUpdateDto[]> GetUsersAsync()
+        {
+            try
+            {
+                var user = await _userPersist.GetUsersAsync();
+                if (user == null) return null;
+
+                var userUpdateDto = _mapper.Map<UserUpdateDto[]>(user);
+                return userUpdateDto;
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception($"Erro ao tentar pegar Usuário por Username. Erro: {ex.Message}");
+            }
+        }
+
         public async Task<UserUpdateDto> UpdateAccount(UserUpdateDto userUpdateDto)
         {
             try

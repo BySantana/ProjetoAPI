@@ -119,22 +119,22 @@ namespace ProjetoAPI.Application
             }
         }
 
-        //public async Task<PostDto[]> GetPostByTagAsync(int userId, string tag)
-        //{
-        //    try
-        //    {
-        //        var eventos = await _postPersist.GetPostByTagAsync(userId, tag);
-        //        if (eventos == null) return null;
+        public async Task<PostDto[]> GetPostByTagAsync(string tag)
+        {
+            try
+            {
+                var eventos = await _postPersist.GetPostByTagAsync(tag);
+                if (eventos == null) return null;
 
-        //        var resultado = _mapper.Map<PostDto[]>(eventos);
+                var resultado = _mapper.Map<PostDto[]>(eventos);
 
-        //        return resultado;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public async Task<PostDto[]> GetPostByTituloAsync(string Titulo)
         {

@@ -23,6 +23,7 @@ namespace ProjetoAPI.Controllers
             _accountService = accountService;
         }
 
+        [AllowAnonymous]
         [HttpGet("comentario/{comentarioId}")]
         public async Task<IActionResult> GetByComentario(int comentarioId)
         {
@@ -57,7 +58,7 @@ namespace ProjetoAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("{comentarioId}")]
         public async Task<IActionResult> Post(InteracaoDto model, int comentarioId)
         {
             try
